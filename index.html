@@ -1543,6 +1543,8 @@ function markDone(id) {
   const card = document.getElementById('card-' + id);
   if (done[id]) { card.classList.add('done-card'); spawnConfetti(btn); }
   else { card.classList.remove('done-card'); }
+  
+  function markDone(workout) {\n    // Existing logic\n    // Logic to check if siblings are all incomplete\n    const week = findWeekForDay(workout.dayId);\n    const allIncomplete = week.workouts.every(w => !w.isChecked);\n    if (allIncomplete) {\n        // Restore week to its original chronological position based on week.num\n        restoreWeekPosition(week);\n    }\n} \n\nfunction findWeekForDay(dayId) {\n    // Logic to look up the week a workout belongs to\n    return weeks.find(week => week.days.includes(dayId));\n} \n\nfunction restoreWeekPosition(week) {\n    // Logic to restore week based on week.num\n    const originalPosition = getOriginalPosition(week.num);\n    // Move week to originalPosition in the schedule\n} \n
 }
 
 function rotateWeekToEnd(visibleIndex) {
