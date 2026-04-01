@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>🏁 My HYROX Training Plan</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
-    <link rel="icon" type="image/png" href="icon.png">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --pink: #fde8ef;
-    --pink-dark: #f5b8cb;
-    --pink-accent: #e0708f;
-    --yellow: #fff8e1;
-    --yellow-dark: #ffe082;
-    --yellow-accent: #f4b942;
-    --blue: #e3f0fd;
+
     --blue-dark: #b8d9f8;
     --blue-accent: #5ba4d4;
     --orange: #fff0e0;
@@ -736,9 +719,6 @@
   <button class="nav-btn" onclick="showView('notes', this)">
     <span class="nav-icon">📓</span> Notes
   </button>
-<div class="photo-gallery">
-    <h2>Photo Gallery</h2>
-    <div id="masonry-grid"></div>
 </div>
 
 <script>
@@ -1482,10 +1462,6 @@ function markDone(id) {
   const card = document.getElementById('card-' + id);
   if (done[id]) { card.classList.add('done-card'); spawnConfetti(btn); }
   else { card.classList.remove('done-card'); }
-<style>
-.photo-gallery {
-    display: block;
-    margin: 20px 0;
 }
 
 function rotateWeekToEnd(visibleIndex) {
@@ -1496,9 +1472,6 @@ function rotateWeekToEnd(visibleIndex) {
   renderWeeks();
   // scroll to top of plan
   document.getElementById('weeks-container').scrollIntoView({behavior:'smooth', block:'start'});
-#masonry-grid {
-    display: flex;
-    flex-wrap: wrap;
 }
 
 function spawnConfetti(btn) {
@@ -1518,9 +1491,6 @@ function spawnConfetti(btn) {
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 1500);
   }
-.photo-item {
-    position: relative;
-    margin: 5px;
 }
 
 // =============================================
@@ -1536,10 +1506,6 @@ function buildCalendarDayMap() {
     });
   });
   return map;
-.photo-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
 }
 
 function renderCalendar() {
@@ -1606,9 +1572,6 @@ function renderCalendar() {
     monthEl.innerHTML = html;
     container.appendChild(monthEl);
   });
-.photo-title {
-    text-align: center;
-    margin-top: 5px;
 }
 
 function shortWorkoutName(day) {
@@ -1622,10 +1585,6 @@ function shortWorkoutName(day) {
     rest: '🌸 Rest'
   };
   return map[day.type] || day.title;
-.photo-item .delete-button {
-    position: absolute;
-    top: 5px;
-    right: 5px;
 }
 
 function showCalModal(iso) {
@@ -1646,32 +1605,6 @@ function showCalModal(iso) {
     day.hyrox.forEach(r => {
       if (r.run) detail += `<div class="hyrox-row"><span class="run-tag">🏃 ${r.run}</span><span class="station">→ ${r.station}</span></div>`;
       else detail += `<div class="hyrox-row" style="padding-left:20px"><span class="station">→ ${r.station}</span></div>`;
-</style>
-<script>
-// Store photos in localStorage
-function addPhoto(workoutId, date, title, base64Image) {
-    const photos = JSON.parse(localStorage.getItem('photos')) || {};
-    photos[workoutId] = { date, title, image: base64Image };
-    localStorage.setItem('photos', JSON.stringify(photos));
-}
-
-// Display photos shuffled
-function displayPhotos() {
-    const photos = JSON.parse(localStorage.getItem('photos')) || {};
-    const photoKeys = Object.keys(photos).sort(() => Math.random() - 0.5);
-    const grid = document.getElementById('masonry-grid');
-    grid.innerHTML = ''; // clear existing photos
-
-    photoKeys.forEach(key => {
-        const { date, title, image } = photos[key];
-        const photoItem = document.createElement('div');
-        photoItem.className = 'photo-item';
-        photoItem.innerHTML = `
-            <img src="${image}" alt="${title}">
-            <div class="photo-title">${title} - ${date}</div>
-            <button class="delete-button" onclick="deletePhoto('${key}')">Delete</button>
-        `;
-        grid.appendChild(photoItem);
     });
     detail += `</div>`;
   } else if (day.exercises) {
@@ -1705,12 +1638,6 @@ function showView(view, btn) {
   document.getElementById('view-calendar').classList.toggle('hidden', view !== 'calendar');
   document.getElementById('view-notes').classList.toggle('hidden', view !== 'notes');
   if (view === 'calendar') renderCalendar();
-// Delete photo
-function deletePhoto(workoutId) {
-    const photos = JSON.parse(localStorage.getItem('photos'));
-    delete photos[workoutId];
-    localStorage.setItem('photos', JSON.stringify(photos));
-    displayPhotos();
 }
 
 // =============================================
@@ -1725,10 +1652,6 @@ function initNotes() {
   } catch(e) {}
   ta.addEventListener('input', () => { try { localStorage.setItem('hyrox_v2_notes', ta.value); } catch(e) {} });
   ga.addEventListener('input', () => { try { localStorage.setItem('hyrox_v2_goals', ga.value); } catch(e) {} });
-// Modal function for photo upload
-function showPhotoModal() {
-    // Implement modal logic here (including camera capture and file upload options)
-    // Call addPhoto() function after photo is captured/uploaded
 }
 
 // =============================================
@@ -1739,4 +1662,3 @@ initNotes();
 </script>
 </body>
 </html>
-</script>
